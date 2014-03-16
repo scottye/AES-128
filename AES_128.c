@@ -289,11 +289,11 @@ void InvShiftRows (unsigned char StateArray[][4])
   StateArray[2][1] = StateArray[2][3];
   StateArray[2][3] = x;
   
-  x = StateArray[1][0];
-  StateArray[1][0] = StateArray[1][1];
-  StateArray[1][1] = StateArray[1][2];
-  StateArray[1][2] = StateArray[1][3];
-  StateArray[1][3] = x;
+  x = StateArray[3][0];
+  StateArray[3][0] = StateArray[3][1];
+  StateArray[3][1] = StateArray[3][2];
+  StateArray[3][2] = StateArray[3][3];
+  StateArray[3][3] = x;
   
   // row #1 - rotate 1 left
   // TODO our code here
