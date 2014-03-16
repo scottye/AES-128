@@ -183,7 +183,7 @@ void decrypt() {
 
 		// Rounds
 		int i;
-		for(i=9; i>0; i--) {
+		for(i=9; i>=0; i--) {
 			InvShiftRows(StateArray);
 #if (AES_PRINT & AES_PRINT_DETAILS)
 			printf("-- Test State- Round %d after InvShiftRows \r\n\n",i);
