@@ -191,7 +191,7 @@ void decrypt() {
 			printf("-----------------------\r\n\n");
 #endif
 
-			InvSubBytes(StateArray);
+			InvSubBytesCalculated(StateArray);
 #if (AES_PRINT & AES_PRINT_DETAILS)
 			printf("-- Test State - Round %d after InvSubBytes \r\n\n",i);
 			AES_printf(StateArray);

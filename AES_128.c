@@ -271,6 +271,31 @@ void InvSubBytes (unsigned char StateArray[][4])
       StateArray[i][j] = invSBox[StateArray[i][j]];
 }
 
+void InvSubBytesCalculated (unsigned char StateArray[][4])
+{
+  unsigned char s, x;
+  int i, j, k;
+  unsigned char c = 0x63;
+  for (i=0; i<4; i++)
+    {    
+      for (j=0; j<4; j++)
+	{
+	  s = x = StateArray[i][j];
+	  s = (s << 1) | (s >> 7); // rotate left 1 to start (msb: 6)
+	  x = (x << 1) | (x >> 7); // rotate left 1 to start (msb: 6)
+	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 5)
+	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 4)
+	  x ^= s;
+	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 3)
+	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 2)
+	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 1)
+	  x ^= s;
+	  x ^= 0x05;
+	  StateArray[i][j] = ee (x, FX);
+	}
+    }
+}
+
 void InvShiftRows (unsigned char StateArray[][4])
 {
   // rotate right ->!
