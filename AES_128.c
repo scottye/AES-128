@@ -49,7 +49,7 @@ const unsigned char RCon[10] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x020, 0x40, 0x80,
 
 unsigned char multiply(unsigned char a, unsigned char b) {
 	unsigned char result = 0;
-	unsigned char temp  = 0;
+	unsigned char temp,temp2  = 0;
 	unsigned char mask = 1;
 	char i = 0;
 	
@@ -61,50 +61,57 @@ unsigned char multiply(unsigned char a, unsigned char b) {
 	// Iteration 0
 	if (b & mask)
 		result = temp ^ result;
+	temp2 = temp;
 	temp = temp << 1;
-	if (temp & MSB)
+	if (temp2 & MSB)
 		temp = temp ^ FX;
 	mask = mask << 1;
 	// Iteration 1
 	if (b & mask)
 		result = temp ^ result;
+	temp2 = temp;
 	temp = temp << 1;
-	if (temp & MSB)
+	if (temp2 & MSB)
 		temp = temp ^ FX;
 	mask = mask << 1;
 	// Iteration 2
 	if (b & mask)
 		result = temp ^ result;
+	temp2 = temp;
 	temp = temp << 1;
-	if (temp & MSB)
+	if (temp2 & MSB)
 		temp = temp ^ FX;
 	mask = mask << 1;
 	// Iteration 3
 	if (b & mask)
 		result = temp ^ result;
+	temp2 = temp;
 	temp = temp << 1;
-	if (temp & MSB)
+	if (temp2 & MSB)
 		temp = temp ^ FX;
 	mask = mask << 1;
 	// Iteration 4
 	if (b & mask)
 		result = temp ^ result;
+	temp2 = temp;
 	temp = temp << 1;
-	if (temp & MSB)
+	if (temp2 & MSB)
 		temp = temp ^ FX;
 	mask = mask << 1;
 	// Iteration 5
 	if (b & mask)
 		result = temp ^ result;
+	temp2 = temp;
 	temp = temp << 1;
-	if (temp & MSB)
+	if (temp2 & MSB)
 		temp = temp ^ FX;
 	mask = mask << 1;
 	// Iteration 6
 	if (b & mask)
 		result = temp ^ result;
+	temp2 = temp;
 	temp = temp << 1;
-	if (temp & MSB)
+	if (temp2 & MSB)
 		temp = temp ^ FX;
 	mask = mask << 1;
 	// Iteration 7
