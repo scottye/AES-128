@@ -47,7 +47,7 @@ const unsigned char RCon[10] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x020, 0x40, 0x80,
 #define MSB 0x80	//msb of a reduced element
 #define GPB 0x100
 
-unsigned char multiply(unsigned char a, unsigned char b) {
+unsigned inline char multiply(unsigned char a, unsigned char b) {
 	unsigned char result = 0;
 	unsigned char temp  = 0;
 	unsigned char mask = 1;
@@ -73,7 +73,7 @@ unsigned char multiply(unsigned char a, unsigned char b) {
 	return result;
 }
 
-unsigned int divide (unsigned int a, unsigned int b)
+unsigned inline int divide (unsigned int a, unsigned int b)
 {
   unsigned int temp, rem, div_msb, result, c;
 
@@ -107,7 +107,7 @@ unsigned int divide (unsigned int a, unsigned int b)
   return result;
 }
 
-unsigned int ee(unsigned int a, unsigned int b)
+unsigned inline int ee(unsigned int a, unsigned int b)
 {
   //Reduce input to one degree less an fx
   if (a & GPB) {
@@ -145,7 +145,7 @@ unsigned int ee(unsigned int a, unsigned int b)
   return u;
 }
 
-void ExpandKey (unsigned char Key[][4], unsigned char ExpandedKey[][4][4])
+void inline ExpandKey (unsigned char Key[][4], unsigned char ExpandedKey[][4][4])
 {
   unsigned char TempKey[4][4];
   bzero (TempKey, 4*4*sizeof (unsigned char));
@@ -184,7 +184,7 @@ void ExpandKey (unsigned char Key[][4], unsigned char ExpandedKey[][4][4])
     }
 }
 
-void AddRoundKey (unsigned char Key[][4], unsigned char StateArray[][4])
+void inline AddRoundKey (unsigned char Key[][4], unsigned char StateArray[][4])
 {
   int i, j;
   for (i=0; i<4; i++)
@@ -192,7 +192,7 @@ void AddRoundKey (unsigned char Key[][4], unsigned char StateArray[][4])
       StateArray[i][j] ^= Key[i][j];
 }
 
-void SubBytes (unsigned char StateArray[][4])
+void inline SubBytes (unsigned char StateArray[][4])
 {
   int i, j;
   for (i=0; i<4; i++)
@@ -200,7 +200,7 @@ void SubBytes (unsigned char StateArray[][4])
       StateArray[i][j] = SBox[StateArray[i][j]];
 }
 
-void SubBytesCalculated (unsigned char StateArray[][4])
+void inline SubBytesCalculated (unsigned char StateArray[][4])
 {
   unsigned char s, x;
   int i, j, k;
@@ -223,7 +223,7 @@ void SubBytesCalculated (unsigned char StateArray[][4])
     }
 }
 
-void ShiftRows (unsigned char StateArray[][4])
+void inline ShiftRows (unsigned char StateArray[][4])
 {
   unsigned char x;
   
@@ -247,7 +247,7 @@ void ShiftRows (unsigned char StateArray[][4])
   StateArray[3][0] = x;
 }
 
-void MixColumns (unsigned char StateArray[][4])
+void inline MixColumns (unsigned char StateArray[][4])
 {
   int i;
   unsigned char StateArrayTmp[4][4];
@@ -263,7 +263,7 @@ void MixColumns (unsigned char StateArray[][4])
   memcpy (StateArray, StateArrayTmp, 4 * 4 * sizeof (unsigned char));
 }
 
-void InvSubBytes (unsigned char StateArray[][4])
+void inline InvSubBytes (unsigned char StateArray[][4])
 {
   int i, j;
   for (i=0; i<4; i++)
@@ -271,7 +271,7 @@ void InvSubBytes (unsigned char StateArray[][4])
       StateArray[i][j] = invSBox[StateArray[i][j]];
 }
 
-void InvSubBytesCalculated (unsigned char StateArray[][4])
+void inline InvSubBytesCalculated (unsigned char StateArray[][4])
 {
   unsigned char s, x;
   int i, j, k;
@@ -296,7 +296,7 @@ void InvSubBytesCalculated (unsigned char StateArray[][4])
     }
 }
 
-void InvShiftRows (unsigned char StateArray[][4])
+void inline InvShiftRows (unsigned char StateArray[][4])
 {
   // rotate right ->!
   unsigned char x;
@@ -330,7 +330,7 @@ void InvShiftRows (unsigned char StateArray[][4])
   // TODO our code here
 }
 
-void InvMixColumns (unsigned char StateArray[][4])
+void inline InvMixColumns (unsigned char StateArray[][4])
 {
   int i;
   unsigned char StateArrayTmp[4][4];
@@ -346,7 +346,7 @@ void InvMixColumns (unsigned char StateArray[][4])
   memcpy (StateArray, StateArrayTmp, 4 * 4 * sizeof (unsigned char));
 }
 
-void AES_printf (unsigned char AES_StateArray[][4])
+void inline AES_printf (unsigned char AES_StateArray[][4])
 {
   int i;
   printf ("   W0  W1  W2  W3\r\n\n");
