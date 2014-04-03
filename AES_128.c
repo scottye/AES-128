@@ -963,27 +963,203 @@ void InvSubBytes (unsigned char StateArray[][4])
 
 void InvSubBytesCalculated (unsigned char StateArray[][4])
 {
-  unsigned char s, x;
-  int i, j, k;
-  unsigned char c = 0x63;
-  for (i=0; i<4; i++)
-    {    
-      for (j=0; j<4; j++)
-	{
-	  s = x = StateArray[i][j];
-	  s = (s << 1) | (s >> 7); // rotate left 1 to start (msb: 6)
-	  x = (x << 1) | (x >> 7); // rotate left 1 to start (msb: 6)
-	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 5)
-	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 4)
-	  x ^= s;
-	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 3)
-	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 2)
-	  s = (s << 1) | (s >> 7); // rotate left 1 (msb: 1)
-	  x ^= s;
-	  x ^= 0x05;
-	  StateArray[i][j] = ee (x, FX);
-	}
-    }
+	unsigned char s, x;
+  
+	s = x = StateArray[0][0];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[0][0] = ee (x, FX);
+	s = x = StateArray[0][1];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[0][1] = ee (x, FX);
+	s = x = StateArray[0][2];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[0][2] = ee (x, FX);
+	s = x = StateArray[0][3];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[0][3] = ee (x, FX);
+
+	s = x = StateArray[1][0];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[1][0] = ee (x, FX);
+	s = x = StateArray[1][1];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[1][1] = ee (x, FX);
+	s = x = StateArray[1][2];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[1][2] = ee (x, FX);
+	s = x = StateArray[1][3];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[1][3] = ee (x, FX);
+
+	s = x = StateArray[2][0];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[2][0] = ee (x, FX);
+	s = x = StateArray[2][1];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[2][1] = ee (x, FX);
+	s = x = StateArray[2][2];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[2][2] = ee (x, FX);
+	s = x = StateArray[2][3];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[2][3] = ee (x, FX);
+
+	s = x = StateArray[3][0];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[3][0] = ee (x, FX);
+	s = x = StateArray[3][1];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[3][1] = ee (x, FX);
+	s = x = StateArray[3][2];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[3][2] = ee (x, FX);
+	s = x = StateArray[3][3];
+	s = (s << 1) | (s >> 7);
+	x = (x << 1) | (x >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x ^= 0x05;
+	StateArray[3][3] = ee (x, FX);
 }
 
 void InvShiftRows (unsigned char StateArray[][4])
