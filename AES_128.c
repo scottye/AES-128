@@ -707,25 +707,187 @@ void SubBytes (unsigned char StateArray[][4])
 
 void SubBytesCalculated (unsigned char StateArray[][4])
 {
-  unsigned char s, x;
-  int i, j, k;
-  for (i=0; i<4; i++)
-    {    
-      for (j=0; j<4; j++)
-	{
-	  s = x = ee (StateArray[i][j], FX);
-	  for (k=0; k<4; k++)
-	    {
-	      if (s & 0x80)
-		s = (s << 1) | 0x01;
-	      else
-		s = (s << 1) | 0x00;
-	      x = s ^ x;
-	    }
-	  x = x ^ 0x63;
-	  StateArray[i][j] = x;
-	}
-    }
+	unsigned char s, x;
+
+	s = x = ee (StateArray[0][0], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[0][0] = x;
+	s = x = ee (StateArray[0][1], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[0][1] = x;
+	s = x = ee (StateArray[0][2], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[0][2] = x;
+	s = x = ee (StateArray[0][3], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[0][3] = x;
+
+	s = x = ee (StateArray[1][0], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[1][0] = x;
+	s = x = ee (StateArray[1][1], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[1][1] = x;
+	s = x = ee (StateArray[1][2], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[1][2] = x;
+	s = x = ee (StateArray[1][3], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[1][3] = x;
+
+	s = x = ee (StateArray[2][0], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[2][0] = x;
+	s = x = ee (StateArray[2][1], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[2][1] = x;
+	s = x = ee (StateArray[2][2], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[2][2] = x;
+	s = x = ee (StateArray[2][3], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[2][3] = x;
+
+	s = x = ee (StateArray[3][0], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[3][0] = x;
+	s = x = ee (StateArray[3][1], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[3][1] = x;
+	s = x = ee (StateArray[3][2], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[3][2] = x;
+	s = x = ee (StateArray[3][3], FX);
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	s = (s << 1) | (s >> 7);
+	x ^= s;
+	x = x ^ 0x63;
+	StateArray[3][3] = x;
 }
 
 void ShiftRows (unsigned char StateArray[][4])
