@@ -1222,15 +1222,29 @@ void InvMixColumns (unsigned char StateArray[][4])
 
 void AES_printf (unsigned char AES_StateArray[][4])
 {
-  int i;
-  printf ("   W0  W1  W2  W3\r\n\n");
-  for (i=0; i<4; i++)
-    {
-      printf("   %02x  %02x  %02x  %02x\r\n",
-		 AES_StateArray[i][0],
-		 AES_StateArray[i][1],
-		 AES_StateArray[i][2],
-		 AES_StateArray[i][3]);
-      printf("\n");
-    }
+	printf ("   W0  W1  W2  W3\r\n\n");
+	printf("   %02x  %02x  %02x  %02x\r\n",
+	       AES_StateArray[0][0],
+	       AES_StateArray[0][1],
+	       AES_StateArray[0][2],
+	       AES_StateArray[0][3]);
+	printf("\n");
+	printf("   %02x  %02x  %02x  %02x\r\n",
+	       AES_StateArray[1][0],
+	       AES_StateArray[1][1],
+	       AES_StateArray[1][2],
+	       AES_StateArray[1][3]);
+	printf("\n");
+	printf("   %02x  %02x  %02x  %02x\r\n",
+	       AES_StateArray[2][0],
+	       AES_StateArray[2][1],
+	       AES_StateArray[2][2],
+	       AES_StateArray[2][3]);
+	printf("\n");
+	printf("   %02x  %02x  %02x  %02x\r\n",
+	       AES_StateArray[3][0],
+	       AES_StateArray[3][1],
+	       AES_StateArray[3][2],
+	       AES_StateArray[3][3]);
+	printf("\n");
 }
