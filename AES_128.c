@@ -667,10 +667,22 @@ void ExpandKey (unsigned char Key[][4], unsigned char ExpandedKey[][4][4])
 
 void AddRoundKey (unsigned char Key[][4], unsigned char StateArray[][4])
 {
-  int i, j;
-  for (i=0; i<4; i++)
-    for (j=0; j<4; j++)
-      StateArray[i][j] ^= Key[i][j];
+	StateArray[0][0] ^= Key[0][0];
+	StateArray[0][1] ^= Key[0][1];
+	StateArray[0][2] ^= Key[0][2];
+	StateArray[0][3] ^= Key[0][3];
+	StateArray[1][0] ^= Key[1][0];
+	StateArray[1][1] ^= Key[1][1];
+	StateArray[1][2] ^= Key[1][2];
+	StateArray[1][3] ^= Key[1][3];
+	StateArray[2][0] ^= Key[2][0];
+	StateArray[2][1] ^= Key[2][1];
+	StateArray[2][2] ^= Key[2][2];
+	StateArray[2][3] ^= Key[2][3];
+	StateArray[3][0] ^= Key[3][0];
+	StateArray[3][1] ^= Key[3][1];
+	StateArray[3][2] ^= Key[3][2];
+	StateArray[3][3] ^= Key[3][3];
 }
 
 void SubBytes (unsigned char StateArray[][4])
