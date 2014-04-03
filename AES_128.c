@@ -57,18 +57,59 @@ unsigned char multiply(unsigned char a, unsigned char b) {
 
 
 	if (a == 0 || b == 0) return 0;
-	for(i = 0; i < DEGREE; i++) {
-		if(b & mask) {					//if current bit in b contributes
-			result = temp ^ result;     //update results
-		}
-		if(temp & MSB) {				//if temp value need to be reduced
-			temp = temp << 1;			//shift once
-			temp = temp ^ FX;			//reduce
-		} else {
-			temp = temp << 1;			//no reduction only shift once
-		}
-		mask = mask << 1;				//move mask to next significant bit
-	}
+
+	// Iteration 0
+	if (b & mask)
+		result = temp ^ result;
+	temp = temp << 1;
+	if (temp & MSB)
+		temp = temp ^ FX;
+	mask = mask << 1;
+	// Iteration 1
+	if (b & mask)
+		result = temp ^ result;
+	temp = temp << 1;
+	if (temp & MSB)
+		temp = temp ^ FX;
+	mask = mask << 1;
+	// Iteration 2
+	if (b & mask)
+		result = temp ^ result;
+	temp = temp << 1;
+	if (temp & MSB)
+		temp = temp ^ FX;
+	mask = mask << 1;
+	// Iteration 3
+	if (b & mask)
+		result = temp ^ result;
+	temp = temp << 1;
+	if (temp & MSB)
+		temp = temp ^ FX;
+	mask = mask << 1;
+	// Iteration 4
+	if (b & mask)
+		result = temp ^ result;
+	temp = temp << 1;
+	if (temp & MSB)
+		temp = temp ^ FX;
+	mask = mask << 1;
+	// Iteration 5
+	if (b & mask)
+		result = temp ^ result;
+	temp = temp << 1;
+	if (temp & MSB)
+		temp = temp ^ FX;
+	mask = mask << 1;
+	// Iteration 6
+	if (b & mask)
+		result = temp ^ result;
+	temp = temp << 1;
+	if (temp & MSB)
+		temp = temp ^ FX;
+	mask = mask << 1;
+	// Iteration 7
+	if (b & mask)
+		result = temp ^ result;
 
 	return result;
 }
