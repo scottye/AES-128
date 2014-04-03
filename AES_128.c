@@ -1198,18 +1198,26 @@ void InvShiftRows (unsigned char StateArray[][4])
 
 void InvMixColumns (unsigned char StateArray[][4])
 {
-  int i;
-  unsigned char StateArrayTmp[4][4];
+	unsigned char StateArrayTmp[4][4];
 
-  for (i=0; i<4; i++)
-    {
-	  StateArrayTmp[0][i] = multiply(0x0e,StateArray[0][i])^multiply(0x0b,StateArray[1][i])^multiply(0x0d,StateArray[2][i])^multiply(0x09,StateArray[3][i]);
-      StateArrayTmp[1][i] = multiply(0x09,StateArray[0][i])^multiply(0x0e,StateArray[1][i])^multiply(0x0b,StateArray[2][i])^multiply(0x0d,StateArray[3][i]);
-      StateArrayTmp[2][i] = multiply(0x0d,StateArray[0][i])^multiply(0x09,StateArray[1][i])^multiply(0x0e,StateArray[2][i])^multiply(0x0b,StateArray[3][i]);
-      StateArrayTmp[3][i] = multiply(0x0b,StateArray[0][i])^multiply(0x0d,StateArray[1][i])^multiply(0x09,StateArray[2][i])^multiply(0x0e,StateArray[3][i]);
-    }
+	StateArrayTmp[0][0] = multiply(0x0e,StateArray[0][0])^multiply(0x0b,StateArray[1][0])^multiply(0x0d,StateArray[2][0])^multiply(0x09,StateArray[3][0]);
+	StateArrayTmp[1][0] = multiply(0x09,StateArray[0][0])^multiply(0x0e,StateArray[1][0])^multiply(0x0b,StateArray[2][0])^multiply(0x0d,StateArray[3][0]);
+	StateArrayTmp[2][0] = multiply(0x0d,StateArray[0][0])^multiply(0x09,StateArray[1][0])^multiply(0x0e,StateArray[2][0])^multiply(0x0b,StateArray[3][0]);
+	StateArrayTmp[3][0] = multiply(0x0b,StateArray[0][0])^multiply(0x0d,StateArray[1][0])^multiply(0x09,StateArray[2][0])^multiply(0x0e,StateArray[3][0]);
+	StateArrayTmp[0][1] = multiply(0x0e,StateArray[0][1])^multiply(0x0b,StateArray[1][1])^multiply(0x0d,StateArray[2][1])^multiply(0x09,StateArray[3][1]);
+	StateArrayTmp[1][1] = multiply(0x09,StateArray[0][1])^multiply(0x0e,StateArray[1][1])^multiply(0x0b,StateArray[2][1])^multiply(0x0d,StateArray[3][1]);
+	StateArrayTmp[2][1] = multiply(0x0d,StateArray[0][1])^multiply(0x09,StateArray[1][1])^multiply(0x0e,StateArray[2][1])^multiply(0x0b,StateArray[3][1]);
+	StateArrayTmp[3][1] = multiply(0x0b,StateArray[0][1])^multiply(0x0d,StateArray[1][1])^multiply(0x09,StateArray[2][1])^multiply(0x0e,StateArray[3][1]);
+	StateArrayTmp[0][2] = multiply(0x0e,StateArray[0][2])^multiply(0x0b,StateArray[1][2])^multiply(0x0d,StateArray[2][2])^multiply(0x09,StateArray[3][2]);
+	StateArrayTmp[1][2] = multiply(0x09,StateArray[0][2])^multiply(0x0e,StateArray[1][2])^multiply(0x0b,StateArray[2][2])^multiply(0x0d,StateArray[3][2]);
+	StateArrayTmp[2][2] = multiply(0x0d,StateArray[0][2])^multiply(0x09,StateArray[1][2])^multiply(0x0e,StateArray[2][2])^multiply(0x0b,StateArray[3][2]);
+	StateArrayTmp[3][2] = multiply(0x0b,StateArray[0][2])^multiply(0x0d,StateArray[1][2])^multiply(0x09,StateArray[2][2])^multiply(0x0e,StateArray[3][2]);
+	StateArrayTmp[0][3] = multiply(0x0e,StateArray[0][3])^multiply(0x0b,StateArray[1][3])^multiply(0x0d,StateArray[2][3])^multiply(0x09,StateArray[3][3]);
+	StateArrayTmp[1][3] = multiply(0x09,StateArray[0][3])^multiply(0x0e,StateArray[1][3])^multiply(0x0b,StateArray[2][3])^multiply(0x0d,StateArray[3][3]);
+	StateArrayTmp[2][3] = multiply(0x0d,StateArray[0][3])^multiply(0x09,StateArray[1][3])^multiply(0x0e,StateArray[2][3])^multiply(0x0b,StateArray[3][3]);
+	StateArrayTmp[3][3] = multiply(0x0b,StateArray[0][3])^multiply(0x0d,StateArray[1][3])^multiply(0x09,StateArray[2][3])^multiply(0x0e,StateArray[3][3]);
 
-  memcpy (StateArray, StateArrayTmp, 4 * 4 * sizeof (unsigned char));
+	memcpy (StateArray, StateArrayTmp, 4 * 4 * sizeof (unsigned char));
 }
 
 void AES_printf (unsigned char AES_StateArray[][4])
