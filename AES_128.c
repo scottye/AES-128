@@ -196,33 +196,466 @@ void ExpandKey (unsigned char Key[][4], unsigned char ExpandedKey[][4][4])
 
   memcpy (ExpandedKey[0], Key, 4*4*sizeof (unsigned char));
 
-  for (i=1; i<11; i++)
-    {
-      TempKeyCol[0] = ExpandedKey[i-1][1][3];
-      TempKeyCol[1] = ExpandedKey[i-1][2][3];
-      TempKeyCol[2] = ExpandedKey[i-1][3][3];
-      TempKeyCol[3] = ExpandedKey[i-1][0][3];
-
-      TempKeyCol[0] = SBox[ TempKeyCol[0] ];
-      TempKeyCol[1] = SBox[ TempKeyCol[1] ];
-      TempKeyCol[2] = SBox[ TempKeyCol[2] ];
-      TempKeyCol[3] = SBox[ TempKeyCol[3] ];
-
-      TempKeyCol[0] ^= RCon[i-1];
-
-      for (j=0; j<4; j++)
-	{
-	  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[i-1][0][j];
-	  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[i-1][1][j];
-	  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[i-1][2][j];
-	  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[i-1][3][j];
-
-	  ExpandedKey[i][0][j] = TempKeyCol[0];
-	  ExpandedKey[i][1][j] = TempKeyCol[1];
-	  ExpandedKey[i][2][j] = TempKeyCol[2];
-	  ExpandedKey[i][3][j] = TempKeyCol[3];
-	}
-    }
+  // Outer iteration 1
+  TempKeyCol[0] = ExpandedKey[1-1][1][3];
+  TempKeyCol[1] = ExpandedKey[1-1][2][3];
+  TempKeyCol[2] = ExpandedKey[1-1][3][3];
+  TempKeyCol[3] = ExpandedKey[1-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[1-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[1-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[1-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[1-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[1-1][3][0];
+  ExpandedKey[1][0][0] = TempKeyCol[0];
+  ExpandedKey[1][1][0] = TempKeyCol[1];
+  ExpandedKey[1][2][0] = TempKeyCol[2];
+  ExpandedKey[1][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[1-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[1-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[1-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[1-1][3][1];
+  ExpandedKey[1][0][1] = TempKeyCol[0];
+  ExpandedKey[1][1][1] = TempKeyCol[1];
+  ExpandedKey[1][2][1] = TempKeyCol[2];
+  ExpandedKey[1][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[1-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[1-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[1-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[1-1][3][2];
+  ExpandedKey[1][0][2] = TempKeyCol[0];
+  ExpandedKey[1][1][2] = TempKeyCol[1];
+  ExpandedKey[1][2][2] = TempKeyCol[2];
+  ExpandedKey[1][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[1-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[1-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[1-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[1-1][3][3];
+  ExpandedKey[1][0][3] = TempKeyCol[0];
+  ExpandedKey[1][1][3] = TempKeyCol[1];
+  ExpandedKey[1][2][3] = TempKeyCol[2];
+  ExpandedKey[1][3][3] = TempKeyCol[3];
+  // Outer iteration 2
+  TempKeyCol[0] = ExpandedKey[2-1][1][3];
+  TempKeyCol[1] = ExpandedKey[2-1][2][3];
+  TempKeyCol[2] = ExpandedKey[2-1][3][3];
+  TempKeyCol[3] = ExpandedKey[2-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[2-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[2-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[2-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[2-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[2-1][3][0];
+  ExpandedKey[2][0][0] = TempKeyCol[0];
+  ExpandedKey[2][1][0] = TempKeyCol[1];
+  ExpandedKey[2][2][0] = TempKeyCol[2];
+  ExpandedKey[2][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[2-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[2-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[2-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[2-1][3][1];
+  ExpandedKey[2][0][1] = TempKeyCol[0];
+  ExpandedKey[2][1][1] = TempKeyCol[1];
+  ExpandedKey[2][2][1] = TempKeyCol[2];
+  ExpandedKey[2][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[2-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[2-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[2-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[2-1][3][2];
+  ExpandedKey[2][0][2] = TempKeyCol[0];
+  ExpandedKey[2][1][2] = TempKeyCol[1];
+  ExpandedKey[2][2][2] = TempKeyCol[2];
+  ExpandedKey[2][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[2-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[2-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[2-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[2-1][3][3];
+  ExpandedKey[2][0][3] = TempKeyCol[0];
+  ExpandedKey[2][1][3] = TempKeyCol[1];
+  ExpandedKey[2][2][3] = TempKeyCol[2];
+  ExpandedKey[2][3][3] = TempKeyCol[3];
+  // Outer iteration 3
+  TempKeyCol[0] = ExpandedKey[3-1][1][3];
+  TempKeyCol[1] = ExpandedKey[3-1][2][3];
+  TempKeyCol[2] = ExpandedKey[3-1][3][3];
+  TempKeyCol[3] = ExpandedKey[3-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[3-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[3-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[3-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[3-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[3-1][3][0];
+  ExpandedKey[3][0][0] = TempKeyCol[0];
+  ExpandedKey[3][1][0] = TempKeyCol[1];
+  ExpandedKey[3][2][0] = TempKeyCol[2];
+  ExpandedKey[3][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[3-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[3-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[3-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[3-1][3][1];
+  ExpandedKey[3][0][1] = TempKeyCol[0];
+  ExpandedKey[3][1][1] = TempKeyCol[1];
+  ExpandedKey[3][2][1] = TempKeyCol[2];
+  ExpandedKey[3][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[3-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[3-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[3-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[3-1][3][2];
+  ExpandedKey[3][0][2] = TempKeyCol[0];
+  ExpandedKey[3][1][2] = TempKeyCol[1];
+  ExpandedKey[3][2][2] = TempKeyCol[2];
+  ExpandedKey[3][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[3-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[3-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[3-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[3-1][3][3];
+  ExpandedKey[3][0][3] = TempKeyCol[0];
+  ExpandedKey[3][1][3] = TempKeyCol[1];
+  ExpandedKey[3][2][3] = TempKeyCol[2];
+  ExpandedKey[3][3][3] = TempKeyCol[3];
+  // Outer iteration 4
+  TempKeyCol[0] = ExpandedKey[4-1][1][3];
+  TempKeyCol[1] = ExpandedKey[4-1][2][3];
+  TempKeyCol[2] = ExpandedKey[4-1][3][3];
+  TempKeyCol[3] = ExpandedKey[4-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[4-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[4-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[4-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[4-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[4-1][3][0];
+  ExpandedKey[4][0][0] = TempKeyCol[0];
+  ExpandedKey[4][1][0] = TempKeyCol[1];
+  ExpandedKey[4][2][0] = TempKeyCol[2];
+  ExpandedKey[4][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[4-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[4-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[4-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[4-1][3][1];
+  ExpandedKey[4][0][1] = TempKeyCol[0];
+  ExpandedKey[4][1][1] = TempKeyCol[1];
+  ExpandedKey[4][2][1] = TempKeyCol[2];
+  ExpandedKey[4][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[4-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[4-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[4-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[4-1][3][2];
+  ExpandedKey[4][0][2] = TempKeyCol[0];
+  ExpandedKey[4][1][2] = TempKeyCol[1];
+  ExpandedKey[4][2][2] = TempKeyCol[2];
+  ExpandedKey[4][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[4-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[4-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[4-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[4-1][3][3];
+  ExpandedKey[4][0][3] = TempKeyCol[0];
+  ExpandedKey[4][1][3] = TempKeyCol[1];
+  ExpandedKey[4][2][3] = TempKeyCol[2];
+  ExpandedKey[4][3][3] = TempKeyCol[3];
+  // Outer iteration 5
+  TempKeyCol[0] = ExpandedKey[5-1][1][3];
+  TempKeyCol[1] = ExpandedKey[5-1][2][3];
+  TempKeyCol[2] = ExpandedKey[5-1][3][3];
+  TempKeyCol[3] = ExpandedKey[5-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[5-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[5-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[5-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[5-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[5-1][3][0];
+  ExpandedKey[5][0][0] = TempKeyCol[0];
+  ExpandedKey[5][1][0] = TempKeyCol[1];
+  ExpandedKey[5][2][0] = TempKeyCol[2];
+  ExpandedKey[5][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[5-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[5-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[5-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[5-1][3][1];
+  ExpandedKey[5][0][1] = TempKeyCol[0];
+  ExpandedKey[5][1][1] = TempKeyCol[1];
+  ExpandedKey[5][2][1] = TempKeyCol[2];
+  ExpandedKey[5][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[5-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[5-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[5-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[5-1][3][2];
+  ExpandedKey[5][0][2] = TempKeyCol[0];
+  ExpandedKey[5][1][2] = TempKeyCol[1];
+  ExpandedKey[5][2][2] = TempKeyCol[2];
+  ExpandedKey[5][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[5-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[5-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[5-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[5-1][3][3];
+  ExpandedKey[5][0][3] = TempKeyCol[0];
+  ExpandedKey[5][1][3] = TempKeyCol[1];
+  ExpandedKey[5][2][3] = TempKeyCol[2];
+  ExpandedKey[5][3][3] = TempKeyCol[3];
+  // Outer iteration 6
+  TempKeyCol[0] = ExpandedKey[6-1][1][3];
+  TempKeyCol[1] = ExpandedKey[6-1][2][3];
+  TempKeyCol[2] = ExpandedKey[6-1][3][3];
+  TempKeyCol[3] = ExpandedKey[6-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[6-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[6-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[6-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[6-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[6-1][3][0];
+  ExpandedKey[6][0][0] = TempKeyCol[0];
+  ExpandedKey[6][1][0] = TempKeyCol[1];
+  ExpandedKey[6][2][0] = TempKeyCol[2];
+  ExpandedKey[6][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[6-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[6-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[6-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[6-1][3][1];
+  ExpandedKey[6][0][1] = TempKeyCol[0];
+  ExpandedKey[6][1][1] = TempKeyCol[1];
+  ExpandedKey[6][2][1] = TempKeyCol[2];
+  ExpandedKey[6][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[6-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[6-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[6-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[6-1][3][2];
+  ExpandedKey[6][0][2] = TempKeyCol[0];
+  ExpandedKey[6][1][2] = TempKeyCol[1];
+  ExpandedKey[6][2][2] = TempKeyCol[2];
+  ExpandedKey[6][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[6-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[6-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[6-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[6-1][3][3];
+  ExpandedKey[6][0][3] = TempKeyCol[0];
+  ExpandedKey[6][1][3] = TempKeyCol[1];
+  ExpandedKey[6][2][3] = TempKeyCol[2];
+  ExpandedKey[6][3][3] = TempKeyCol[3];
+  // Outer iteration 7
+  TempKeyCol[0] = ExpandedKey[7-1][1][3];
+  TempKeyCol[1] = ExpandedKey[7-1][2][3];
+  TempKeyCol[2] = ExpandedKey[7-1][3][3];
+  TempKeyCol[3] = ExpandedKey[7-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[7-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[7-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[7-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[7-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[7-1][3][0];
+  ExpandedKey[7][0][0] = TempKeyCol[0];
+  ExpandedKey[7][1][0] = TempKeyCol[1];
+  ExpandedKey[7][2][0] = TempKeyCol[2];
+  ExpandedKey[7][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[7-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[7-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[7-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[7-1][3][1];
+  ExpandedKey[7][0][1] = TempKeyCol[0];
+  ExpandedKey[7][1][1] = TempKeyCol[1];
+  ExpandedKey[7][2][1] = TempKeyCol[2];
+  ExpandedKey[7][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[7-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[7-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[7-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[7-1][3][2];
+  ExpandedKey[7][0][2] = TempKeyCol[0];
+  ExpandedKey[7][1][2] = TempKeyCol[1];
+  ExpandedKey[7][2][2] = TempKeyCol[2];
+  ExpandedKey[7][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[7-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[7-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[7-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[7-1][3][3];
+  ExpandedKey[7][0][3] = TempKeyCol[0];
+  ExpandedKey[7][1][3] = TempKeyCol[1];
+  ExpandedKey[7][2][3] = TempKeyCol[2];
+  ExpandedKey[7][3][3] = TempKeyCol[3];
+  // Outer iteration 8
+  TempKeyCol[0] = ExpandedKey[8-1][1][3];
+  TempKeyCol[1] = ExpandedKey[8-1][2][3];
+  TempKeyCol[2] = ExpandedKey[8-1][3][3];
+  TempKeyCol[3] = ExpandedKey[8-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[8-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[8-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[8-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[8-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[8-1][3][0];
+  ExpandedKey[8][0][0] = TempKeyCol[0];
+  ExpandedKey[8][1][0] = TempKeyCol[1];
+  ExpandedKey[8][2][0] = TempKeyCol[2];
+  ExpandedKey[8][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[8-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[8-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[8-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[8-1][3][1];
+  ExpandedKey[8][0][1] = TempKeyCol[0];
+  ExpandedKey[8][1][1] = TempKeyCol[1];
+  ExpandedKey[8][2][1] = TempKeyCol[2];
+  ExpandedKey[8][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[8-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[8-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[8-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[8-1][3][2];
+  ExpandedKey[8][0][2] = TempKeyCol[0];
+  ExpandedKey[8][1][2] = TempKeyCol[1];
+  ExpandedKey[8][2][2] = TempKeyCol[2];
+  ExpandedKey[8][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[8-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[8-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[8-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[8-1][3][3];
+  ExpandedKey[8][0][3] = TempKeyCol[0];
+  ExpandedKey[8][1][3] = TempKeyCol[1];
+  ExpandedKey[8][2][3] = TempKeyCol[2];
+  ExpandedKey[8][3][3] = TempKeyCol[3];
+  // Outer iteration 9
+  TempKeyCol[0] = ExpandedKey[9-1][1][3];
+  TempKeyCol[1] = ExpandedKey[9-1][2][3];
+  TempKeyCol[2] = ExpandedKey[9-1][3][3];
+  TempKeyCol[3] = ExpandedKey[9-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[9-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[9-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[9-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[9-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[9-1][3][0];
+  ExpandedKey[9][0][0] = TempKeyCol[0];
+  ExpandedKey[9][1][0] = TempKeyCol[1];
+  ExpandedKey[9][2][0] = TempKeyCol[2];
+  ExpandedKey[9][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[9-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[9-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[9-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[9-1][3][1];
+  ExpandedKey[9][0][1] = TempKeyCol[0];
+  ExpandedKey[9][1][1] = TempKeyCol[1];
+  ExpandedKey[9][2][1] = TempKeyCol[2];
+  ExpandedKey[9][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[9-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[9-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[9-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[9-1][3][2];
+  ExpandedKey[9][0][2] = TempKeyCol[0];
+  ExpandedKey[9][1][2] = TempKeyCol[1];
+  ExpandedKey[9][2][2] = TempKeyCol[2];
+  ExpandedKey[9][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[9-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[9-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[9-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[9-1][3][3];
+  ExpandedKey[9][0][3] = TempKeyCol[0];
+  ExpandedKey[9][1][3] = TempKeyCol[1];
+  ExpandedKey[9][2][3] = TempKeyCol[2];
+  ExpandedKey[9][3][3] = TempKeyCol[3];
+  // Outer iteration 10
+  TempKeyCol[0] = ExpandedKey[10-1][1][3];
+  TempKeyCol[1] = ExpandedKey[10-1][2][3];
+  TempKeyCol[2] = ExpandedKey[10-1][3][3];
+  TempKeyCol[3] = ExpandedKey[10-1][0][3];
+  TempKeyCol[0] = SBox[ TempKeyCol[0] ];
+  TempKeyCol[1] = SBox[ TempKeyCol[1] ];
+  TempKeyCol[2] = SBox[ TempKeyCol[2] ];
+  TempKeyCol[3] = SBox[ TempKeyCol[3] ];
+  TempKeyCol[0] ^= RCon[10-1];
+  // Iteration 0
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[10-1][0][0];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[10-1][1][0];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[10-1][2][0];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[10-1][3][0];
+  ExpandedKey[10][0][0] = TempKeyCol[0];
+  ExpandedKey[10][1][0] = TempKeyCol[1];
+  ExpandedKey[10][2][0] = TempKeyCol[2];
+  ExpandedKey[10][3][0] = TempKeyCol[3];
+  // Iteration 1
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[10-1][0][1];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[10-1][1][1];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[10-1][2][1];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[10-1][3][1];
+  ExpandedKey[10][0][1] = TempKeyCol[0];
+  ExpandedKey[10][1][1] = TempKeyCol[1];
+  ExpandedKey[10][2][1] = TempKeyCol[2];
+  ExpandedKey[10][3][1] = TempKeyCol[3];
+  // Iteration 2
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[10-1][0][2];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[10-1][1][2];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[10-1][2][2];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[10-1][3][2];
+  ExpandedKey[10][0][2] = TempKeyCol[0];
+  ExpandedKey[10][1][2] = TempKeyCol[1];
+  ExpandedKey[10][2][2] = TempKeyCol[2];
+  ExpandedKey[10][3][2] = TempKeyCol[3];
+  // Iteration 3
+  TempKeyCol[0] = TempKeyCol[0] ^ ExpandedKey[10-1][0][3];
+  TempKeyCol[1] = TempKeyCol[1] ^ ExpandedKey[10-1][1][3];
+  TempKeyCol[2] = TempKeyCol[2] ^ ExpandedKey[10-1][2][3];
+  TempKeyCol[3] = TempKeyCol[3] ^ ExpandedKey[10-1][3][3];
+  ExpandedKey[10][0][3] = TempKeyCol[0];
+  ExpandedKey[10][1][3] = TempKeyCol[1];
+  ExpandedKey[10][2][3] = TempKeyCol[2];
+  ExpandedKey[10][3][3] = TempKeyCol[3];
 }
 
 void AddRoundKey (unsigned char Key[][4], unsigned char StateArray[][4])
