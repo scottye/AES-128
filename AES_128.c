@@ -916,18 +916,29 @@ void ShiftRows (unsigned char StateArray[][4])
 
 void MixColumns (unsigned char StateArray[][4])
 {
-  int i;
-  unsigned char StateArrayTmp[4][4];
+	unsigned char StateArrayTmp[4][4];
 
-  for (i=0; i<4; i++)
-    {
-      StateArrayTmp[0][i] = xTime (StateArray[0][i]) ^ xTime (StateArray[1][i]) ^ StateArray[1][i] ^ StateArray[2][i] ^ StateArray[3][i];
-      StateArrayTmp[1][i] = StateArray[0][i] ^ xTime (StateArray[1][i]) ^ xTime (StateArray[2][i]) ^ StateArray[2][i] ^ StateArray[3][i];
-      StateArrayTmp[2][i] = StateArray[0][i] ^ StateArray[1][i] ^ xTime (StateArray[2][i]) ^ xTime (StateArray[3][i]) ^ StateArray[3][i];
-      StateArrayTmp[3][i] = xTime (StateArray[0][i]) ^ StateArray[0][i] ^ StateArray[1][i] ^ StateArray[2][i] ^ xTime (StateArray[3][i]);
-    }
+	StateArrayTmp[0][0] = xTime (StateArray[0][0]) ^ xTime (StateArray[1][0]) ^ StateArray[1][0] ^ StateArray[2][0] ^ StateArray[3][0];
+	StateArrayTmp[1][0] = StateArray[0][0] ^ xTime (StateArray[1][0]) ^ xTime (StateArray[2][0]) ^ StateArray[2][0] ^ StateArray[3][0];
+	StateArrayTmp[2][0] = StateArray[0][0] ^ StateArray[1][0] ^ xTime (StateArray[2][0]) ^ xTime (StateArray[3][0]) ^ StateArray[3][0];
+	StateArrayTmp[3][0] = xTime (StateArray[0][0]) ^ StateArray[0][0] ^ StateArray[1][0] ^ StateArray[2][0] ^ xTime (StateArray[3][0]);
 
-  memcpy (StateArray, StateArrayTmp, 4 * 4 * sizeof (unsigned char));
+	StateArrayTmp[0][1] = xTime (StateArray[0][1]) ^ xTime (StateArray[1][1]) ^ StateArray[1][1] ^ StateArray[2][1] ^ StateArray[3][1];
+	StateArrayTmp[1][1] = StateArray[0][1] ^ xTime (StateArray[1][1]) ^ xTime (StateArray[2][1]) ^ StateArray[2][1] ^ StateArray[3][1];
+	StateArrayTmp[2][1] = StateArray[0][1] ^ StateArray[1][1] ^ xTime (StateArray[2][1]) ^ xTime (StateArray[3][1]) ^ StateArray[3][1];
+	StateArrayTmp[3][1] = xTime (StateArray[0][1]) ^ StateArray[0][1] ^ StateArray[1][1] ^ StateArray[2][1] ^ xTime (StateArray[3][1]);
+
+	StateArrayTmp[0][2] = xTime (StateArray[0][2]) ^ xTime (StateArray[1][2]) ^ StateArray[1][2] ^ StateArray[2][2] ^ StateArray[3][2];
+	StateArrayTmp[1][2] = StateArray[0][2] ^ xTime (StateArray[1][2]) ^ xTime (StateArray[2][2]) ^ StateArray[2][2] ^ StateArray[3][2];
+	StateArrayTmp[2][2] = StateArray[0][2] ^ StateArray[1][2] ^ xTime (StateArray[2][2]) ^ xTime (StateArray[3][2]) ^ StateArray[3][2];
+	StateArrayTmp[3][2] = xTime (StateArray[0][2]) ^ StateArray[0][2] ^ StateArray[1][2] ^ StateArray[2][2] ^ xTime (StateArray[3][2]);
+
+	StateArrayTmp[0][3] = xTime (StateArray[0][3]) ^ xTime (StateArray[1][3]) ^ StateArray[1][3] ^ StateArray[2][3] ^ StateArray[3][3];
+	StateArrayTmp[1][3] = StateArray[0][3] ^ xTime (StateArray[1][3]) ^ xTime (StateArray[2][3]) ^ StateArray[2][3] ^ StateArray[3][3];
+	StateArrayTmp[2][3] = StateArray[0][3] ^ StateArray[1][3] ^ xTime (StateArray[2][3]) ^ xTime (StateArray[3][3]) ^ StateArray[3][3];
+	StateArrayTmp[3][3] = xTime (StateArray[0][3]) ^ StateArray[0][3] ^ StateArray[1][3] ^ StateArray[2][3] ^ xTime (StateArray[3][3]);
+
+	memcpy (StateArray, StateArrayTmp, 4 * 4 * sizeof (unsigned char));
 }
 
 void InvSubBytes (unsigned char StateArray[][4])
