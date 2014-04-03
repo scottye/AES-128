@@ -943,10 +943,22 @@ void MixColumns (unsigned char StateArray[][4])
 
 void InvSubBytes (unsigned char StateArray[][4])
 {
-  int i, j;
-  for (i=0; i<4; i++)
-    for (j=0; j<4; j++)
-      StateArray[i][j] = invSBox[StateArray[i][j]];
+	StateArray[0][0] = invSBox[StateArray[0][0]];
+	StateArray[0][1] = invSBox[StateArray[0][1]];
+	StateArray[0][2] = invSBox[StateArray[0][2]];
+	StateArray[0][3] = invSBox[StateArray[0][3]];
+	StateArray[1][0] = invSBox[StateArray[1][0]];
+	StateArray[1][1] = invSBox[StateArray[1][1]];
+	StateArray[1][2] = invSBox[StateArray[1][2]];
+	StateArray[1][3] = invSBox[StateArray[1][3]];
+	StateArray[2][0] = invSBox[StateArray[2][0]];
+	StateArray[2][1] = invSBox[StateArray[2][1]];
+	StateArray[2][2] = invSBox[StateArray[2][2]];
+	StateArray[2][3] = invSBox[StateArray[2][3]];
+	StateArray[3][0] = invSBox[StateArray[3][0]];
+	StateArray[3][1] = invSBox[StateArray[3][1]];
+	StateArray[3][2] = invSBox[StateArray[3][2]];
+	StateArray[3][3] = invSBox[StateArray[3][3]];
 }
 
 void InvSubBytesCalculated (unsigned char StateArray[][4])
