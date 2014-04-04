@@ -37,9 +37,13 @@ const unsigned char invSBox[256] = {
    0x60, 0x51, 0x7F, 0xA9, 0x19, 0xB5, 0x4A, 0x0D, 0x2D, 0xE5, 0x7A, 0x9F, 0x93, 0xC9, 0x9C, 0xEF,  //D
    0xA0, 0xE0, 0x3B, 0x4D, 0xAE, 0x2A, 0xF5, 0xB0, 0xC8, 0xEB, 0xBB, 0x3C, 0x83, 0x53, 0x99, 0x61,  //E
    0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D}; //F
-const unsigned char invSBox[256];
 
 const unsigned char RCon[10] = {0x01, 0x02, 0x04, 0x08, 0x10, 0x020, 0x40, 0x80, 0x1b, 0x36};
+
+unsigned int T0[256];
+unsigned int T1[256];
+unsigned int T2[256];
+unsigned int T3[256];
 
 #define xTime(x) ((x<<1) ^ ((x & 0x080) ? 0x1b : 0x00))
 #define FX 0x11b 	//irreducible polynomial used
@@ -261,6 +265,65 @@ void MixColumns (unsigned char StateArray[][4])
     }
 
   memcpy (StateArray, StateArrayTmp, 4 * 4 * sizeof (unsigned char));
+}
+
+void AESRound(unsigned char StateArray[][4], unsigned char ExpandedKey[][4])
+{
+	int i;
+	// set up tboxes
+	for (i=0; i<256; i++) {
+		unsigned char a = (unsigned char)i;
+		T0[a] = (multiply(2, SBox[a]) << 24)	\
+			| (SBox[a] << 16)		\
+			| (SBox[a] << 8)		\
+			| (multiply(3, SBox[a]));
+		T1[a] = (multiply(3, SBox[a]) << 24)	\
+			| (multiply(2, SBox[a]) << 16)	\
+			| (SBox[a] << 8)		\
+			| SBox[a];
+		T2[a] = (SBox[a] << 24)			\
+			| (multiply(3, SBox[a]) << 16)	\
+			| (multiply(2, SBox[a]) << 8)	\
+			| SBox[a];
+		T3[a] = (SBox[a] << 24)			\
+			| (SBox[a] << 16)		\
+			| (multiply(3, SBox[a]) << 8)	\
+			| (multiply(2, SBox[a]));
+	}
+	// compute columns of the encryption matrix
+	// treat StateArray as an array of ints
+	int e[4], k[4];
+	for (i=0; i<4; i++)
+		k[i] = (ExpandedKey[0][i] << 24)	\
+			| (ExpandedKey[1][i] << 16)	\
+			| (ExpandedKey[2][i] << 8)	\
+			| (ExpandedKey[3][i]);
+	e[0] = (T0[StateArray[0][0]]		\
+		^ T1[StateArray[1][1]]		\
+		^ T2[StateArray[2][2]]		\
+		^ T3[StateArray[3][3]]		\
+		^ k[0]);
+	e[1] = (T0[StateArray[0][1]]		\
+		^ T1[StateArray[1][2]]		\
+		^ T2[StateArray[2][3]]		\
+		^ T3[StateArray[3][0]]		\
+		^ k[1]);
+	e[2] = (T0[StateArray[0][2]]		\
+		^ T1[StateArray[1][3]]		\
+		^ T2[StateArray[2][0]]		\
+		^ T3[StateArray[3][1]]		\
+		^ k[2]);
+	e[3] = (T0[StateArray[0][3]]		\
+		^ T1[StateArray[1][0]]		\
+		^ T2[StateArray[2][1]]		\
+		^ T3[StateArray[3][2]]		\
+		^ k[3]);
+	for (i=0; i<4; i++) {
+		StateArray[0][i] = (e[i] >> 24) & 0xff;
+		StateArray[1][i] = (e[i] >> 16) & 0xff;
+		StateArray[2][i] = (e[i] >> 8) & 0xff;
+		StateArray[3][i] = (e[i]) & 0xff;
+	}
 }
 
 void InvSubBytes (unsigned char StateArray[][4])
