@@ -29,9 +29,9 @@
  
 void SubBytes(unsigned char StateArray[][4]);
 void ShiftRows(unsigned char StateArray[][4]);
-void MixColumns(unsigned char StateArray[][4]);
 
-void SubBytesCalculated(unsigned char StateArray[][4]);
+void FillTBoxes(void);
+void AESRound(unsigned char StateArray[][4], unsigned char ExpandedKey[][4]);
  
  /***********************************************************************
   * Functions for AES decryption

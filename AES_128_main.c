@@ -23,7 +23,12 @@ unsigned char PlainText[4][4]={{0x32, 0x88, 0x31, 0xe0},
 
 // To set all bytes in a block of memory to a particular value,
 // use void * memset(void *dest, int c, size_t count). 							
-								
+
+unsigned int T0[256];
+unsigned int T1[256];
+unsigned int T2[256];
+unsigned int T3[256];
+
 void encrypt();
 void decrypt();
 								
@@ -42,7 +47,7 @@ int main (void) {
 	//--------Decrypt Function-----------------
 	//-----------------------------------------
 	
-	decrypt();
+	//decrypt();
 	
 	//-----------------------------------------
 	//--------Display Results------------------
@@ -60,7 +65,9 @@ void encrypt() {
 	bzero(StateArray, 4*4*sizeof(unsigned char));
 	
 	bzero(ExpandedKey, 11*4*4*sizeof(unsigned char));
-	
+
+	FillTBoxes();
+
 #if (AES_PRINT & AES_PRINT_MAIN)
 	printf("-- Test Encryption Key \r\n\n");
 	AES_printf(Key);
@@ -102,35 +109,28 @@ void encrypt() {
 		
 		// Rounds
 		for(i=1; i<=10; i++) {
-			SubBytesCalculated(StateArray);
-#if (AES_PRINT & AES_PRINT_DETAILS)
-			printf("-- Test State - Round %d after SubBytes \r\n\n",i);
-			AES_printf(StateArray);
-			printf("-----------------------\r\n\n");
-#endif			
-
-			ShiftRows(StateArray);
-#if (AES_PRINT & AES_PRINT_DETAILS)
-			printf("-- Test State- Round %d after ShiftRows \r\n\n",i);
-			AES_printf(StateArray);
-			printf("-----------------------\r\n\n");
-#endif
-
 			if(i != 10) {
-				MixColumns(StateArray);
+			  AESRound(StateArray, ExpandedKey[i]);
 #if (AES_PRINT & AES_PRINT_DETAILS)
-				printf("-- Test State - Round %d after MixColumns \r\n\n",i);
+				printf("-- Test State - Round %d after AESRound \r\n\n",i);
 				AES_printf(StateArray);
 				printf("-----------------------\r\n\n");
 #endif			
-			}
-			
-			AddRoundKey(ExpandedKey[i], StateArray);
+			} else {
+			  SubBytes(StateArray);
+			  ShiftRows(StateArray);
 #if (AES_PRINT & AES_PRINT_DETAILS)
-			printf("-- Test State - End of Round %d \r\n\n", i);
-			AES_printf(StateArray);
-			printf("-----------------------\r\n\n");
+			  printf("-- Test State - After SubBytesShiftRows \r\n\n");
+			  AES_printf(StateArray);
+			  printf("-----------------------\r\n\n");
 #endif
+			  AddRoundKey(ExpandedKey[i], StateArray);
+#if (AES_PRINT & AES_PRINT_DETAILS)
+			  printf("-- Test State - After SubBytesShiftRows \r\n\n");
+			  AES_printf(StateArray);
+			  printf("-----------------------\r\n\n");
+#endif
+			}
 		}
 	}
 #if (AES_PRINT & AES_PRINT_DETAILS)

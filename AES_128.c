@@ -204,29 +204,6 @@ void SubBytes (unsigned char StateArray[][4])
       StateArray[i][j] = SBox[StateArray[i][j]];
 }
 
-void SubBytesCalculated (unsigned char StateArray[][4])
-{
-  unsigned char s, x;
-  int i, j, k;
-  for (i=0; i<4; i++)
-    {    
-      for (j=0; j<4; j++)
-	{
-	  s = x = ee (StateArray[i][j], FX);
-	  for (k=0; k<4; k++)
-	    {
-	      if (s & 0x80)
-		s = (s << 1) | 0x01;
-	      else
-		s = (s << 1) | 0x00;
-	      x = s ^ x;
-	    }
-	  x = x ^ 0x63;
-	  StateArray[i][j] = x;
-	}
-    }
-}
-
 void ShiftRows (unsigned char StateArray[][4])
 {
   unsigned char x;
@@ -251,26 +228,9 @@ void ShiftRows (unsigned char StateArray[][4])
   StateArray[3][0] = x;
 }
 
-void MixColumns (unsigned char StateArray[][4])
-{
-  int i;
-  unsigned char StateArrayTmp[4][4];
-
-  for (i=0; i<4; i++)
-    {
-      StateArrayTmp[0][i] = xTime (StateArray[0][i]) ^ xTime (StateArray[1][i]) ^ StateArray[1][i] ^ StateArray[2][i] ^ StateArray[3][i];
-      StateArrayTmp[1][i] = StateArray[0][i] ^ xTime (StateArray[1][i]) ^ xTime (StateArray[2][i]) ^ StateArray[2][i] ^ StateArray[3][i];
-      StateArrayTmp[2][i] = StateArray[0][i] ^ StateArray[1][i] ^ xTime (StateArray[2][i]) ^ xTime (StateArray[3][i]) ^ StateArray[3][i];
-      StateArrayTmp[3][i] = xTime (StateArray[0][i]) ^ StateArray[0][i] ^ StateArray[1][i] ^ StateArray[2][i] ^ xTime (StateArray[3][i]);
-    }
-
-  memcpy (StateArray, StateArrayTmp, 4 * 4 * sizeof (unsigned char));
-}
-
-void AESRound(unsigned char StateArray[][4], unsigned char ExpandedKey[][4])
+void FillTBoxes(void)
 {
 	int i;
-	// set up tboxes
 	for (i=0; i<256; i++) {
 		unsigned char a = (unsigned char)i;
 		T0[a] = (multiply(2, SBox[a]) << 24)	\
@@ -290,8 +250,11 @@ void AESRound(unsigned char StateArray[][4], unsigned char ExpandedKey[][4])
 			| (multiply(3, SBox[a]) << 8)	\
 			| (multiply(2, SBox[a]));
 	}
-	// compute columns of the encryption matrix
-	// treat StateArray as an array of ints
+}
+
+void AESRound(unsigned char StateArray[][4], unsigned char ExpandedKey[][4])
+{
+	int i;
 	int e[4], k[4];
 	for (i=0; i<4; i++)
 		k[i] = (ExpandedKey[0][i] << 24)	\
