@@ -66,8 +66,6 @@ void encrypt() {
 	
 	bzero(ExpandedKey, 11*4*4*sizeof(unsigned char));
 
-	FillTBoxes();
-
 #if (AES_PRINT & AES_PRINT_MAIN)
 	printf("-- Test Encryption Key \r\n\n");
 	AES_printf(Key);
